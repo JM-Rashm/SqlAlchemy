@@ -16,10 +16,10 @@ app.config['SQLALCHEMY_EXCEPTIONS'] = True
 app.secret_key = 'jose'
 api = Api(app)
 
-db.init_app(app)
 
 @app.before_first_request
 def create_table():
+    db.init_app(app)
     db.create_all()
 
 jwt = JWT(app, authenticate, identity)
