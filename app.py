@@ -15,6 +15,8 @@ app.config['SQLALCHEMY_EXCEPTIONS'] = True
 app.secret_key = 'jose'
 api = Api(app)
 
+db.init_app(app)
+
 @app.before_first_request
 def create_table():
     db.create_all()
@@ -28,5 +30,4 @@ api.add_resource(ItemList, '/items')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
-    db.init_app(app)
     app.run(port=5000, debug=True)
